@@ -9,4 +9,6 @@ You can:
 - replace the already uplaoded migration file
 - do migration up or roll back version, both one by one or fast forward migration
 
-This module will handle each company separately. In files folder, every company will have their own migration_version.json file and migration_file directory. This directory is where all sql file will be uploaded. Th emigration_version.json will track the current version and the next number of uploaded version.
+This module will handle each company separately. In files folder, every company will have their own migration_version.json file and migration_file directory. This directory is where all sql file will be uploaded. 
+
+The migration_version.json will track the current version that the system is active and the next number to be given to new uploaded migration file.
