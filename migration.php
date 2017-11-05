@@ -1,7 +1,8 @@
 <?php
 
 $page_security = 'SA_DB_Migration';
-$path_to_root = "../../";
+$path_to_root = "../..";
+
 include($path_to_root . "/includes/session.inc");
 include_once($path_to_root . "/includes/ui.inc");
 include_once($path_to_root . "/admin/db/maintenance_db.inc");
@@ -9,10 +10,6 @@ include_once($path_to_root . "/admin/db/maintenance_db.inc");
 add_access_extensions();
 
 $js = "";
-if ($use_popup_windows)
-    $js .= get_js_open_window(900, 500);
-if ($use_date_picker)
-    $js .= get_js_date_picker();
 
 //Page start
 
@@ -273,16 +270,16 @@ function replace_process(){
 function migrate_up_one(){
     global $db_connections, $path_to_root;
     
-    $fp = fopen($path_to_root . 'modules/db_migration/files/'.$_SESSION["wa_current_user"]->company.'_migration_version.json', 'r');
+    $fp = fopen($path_to_root . '/modules/db_migration/files/'.$_SESSION["wa_current_user"]->company.'_migration_version.json', 'r');
     $data = fread($fp, 4096);
     $array = json_decode($data);
     fclose($fp);
     
-    $filename = $path_to_root . 'modules/db_migration/files/'.$_SESSION["wa_current_user"]->company.'_migration_file/'."UP_".($array->version+1).".sql";
+    $filename = $path_to_root . '/modules/db_migration/files/'.$_SESSION["wa_current_user"]->company.'_migration_file/'."UP_".($array->version+1).".sql";
     db_import($filename, $db_connections[$_SESSION["wa_current_user"]->company]);
     
     $array_json = array("version"=>($array->version+1),"date"=>date("Y-m-d"),"version_counter"=>($array->version_counter));
-    $fp = fopen($path_to_root.'modules/db_migration/files/'.$_SESSION["wa_current_user"]->company.'_migration_version.json', 'w');
+    $fp = fopen($path_to_root.'/modules/db_migration/files/'.$_SESSION["wa_current_user"]->company.'_migration_version.json', 'w');
     fwrite($fp, json_encode($array_json));
     fclose($fp);
     $_POST["_tabs_sel"]="info_status";
@@ -291,16 +288,16 @@ function migrate_up_one(){
 function migrate_back_one(){
     global $db_connections, $path_to_root;
     
-    $fp = fopen($path_to_root . 'modules/db_migration/files/'.$_SESSION["wa_current_user"]->company.'_migration_version.json', 'r');
+    $fp = fopen($path_to_root . '/modules/db_migration/files/'.$_SESSION["wa_current_user"]->company.'_migration_version.json', 'r');
     $data = fread($fp, 4096);
     $array = json_decode($data);
     fclose($fp);
     
-    $filename = $path_to_root . 'modules/db_migration/files/'.$_SESSION["wa_current_user"]->company.'_migration_file/'."DOWN_".($array->version).".sql";
+    $filename = $path_to_root . '/modules/db_migration/files/'.$_SESSION["wa_current_user"]->company.'_migration_file/'."DOWN_".($array->version).".sql";
     db_import($filename, $db_connections[$_SESSION["wa_current_user"]->company]);
     
     $array_json = array("version"=>($array->version-1),"date"=>date("Y-m-d"),"version_counter"=>($array->version_counter));
-    $fp = fopen($path_to_root.'modules/db_migration/files/'.$_SESSION["wa_current_user"]->company.'_migration_version.json', 'w');
+    $fp = fopen($path_to_root.'/modules/db_migration/files/'.$_SESSION["wa_current_user"]->company.'_migration_version.json', 'w');
     fwrite($fp, json_encode($array_json));
     fclose($fp);
     $_POST["_tabs_sel"]="info_status";
@@ -310,7 +307,7 @@ function migrate_fast_forward(){
     global $db_connections, $path_to_root;
     
     $to = get_post("up_fast");
-    $fp = fopen($path_to_root . 'modules/db_migration/files/'.$_SESSION["wa_current_user"]->company.'_migration_version.json', 'r');
+    $fp = fopen($path_to_root . '/modules/db_migration/files/'.$_SESSION["wa_current_user"]->company.'_migration_version.json', 'r');
     $data = fread($fp, 4096);
     $array = json_decode($data);
     fclose($fp);
@@ -325,7 +322,7 @@ function migrate_back_fast(){
     
     $to = get_post("roll_back_fast");
     
-    $fp = fopen($path_to_root . 'modules/db_migration/files/'.$_SESSION["wa_current_user"]->company.'_migration_version.json', 'r');
+    $fp = fopen($path_to_root . '/modules/db_migration/files/'.$_SESSION["wa_current_user"]->company.'_migration_version.json', 'r');
     $data = fread($fp, 4096);
     $array = json_decode($data);
     fclose($fp);
