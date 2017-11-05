@@ -3,7 +3,7 @@
 $page_security = 'SA_DB_Migration';
 $path_to_root = "../..";
 
-include($path_to_root . "/includes/session.inc");
+include_once($path_to_root . "/includes/session.inc");
 include_once($path_to_root . "/includes/ui.inc");
 include_once($path_to_root . "/admin/db/maintenance_db.inc");
 
@@ -38,8 +38,6 @@ if(isset($_POST["roll_back_one"])){
 if(isset($_POST["roll_back_fast_submit"])){
     migrate_back_fast();
 }
-
-
 
 $fp = fopen($path_to_root . '/modules/db_migration/files/'.$_SESSION["wa_current_user"]->company.'_migration_version.json', 'r');
 $data = fread($fp, 4096);
@@ -131,7 +129,7 @@ function migration_file_uploader() {
 }
 
 function migration_file_replace() {
-    global $path_to_root, $array;
+    global $array;
     
     br();
     echo "<center><h3>Replace migration file</h3></center>";
