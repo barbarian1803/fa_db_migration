@@ -1,5 +1,5 @@
 # fa_db_migration
-FrontAccounting v.2.3.xx database migration module
+FrontAccounting v.2.3.xx and v.2.4 database migration module
 
 Can be installed for v.2.4 too. Please refer to : http://frontaccounting.com/punbb/viewtopic.php?id=7056 when installing locally.
 
