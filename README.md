@@ -1,6 +1,7 @@
 # fa_db_migration
 FrontAccounting v.2.3.xx database migration module
 
+Can be installed for v.2.4 too. Please refer to : http://frontaccounting.com/punbb/viewtopic.php?id=7056 when installing locally.
 
 This is a module to handle database migration in FrontAccounting version 2.3.xx.
 If you are an FA developer who needs to modify FA and change FA database structure a lot, this will help you maintain the change in the database.
